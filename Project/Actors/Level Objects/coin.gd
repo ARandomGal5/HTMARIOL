@@ -18,7 +18,7 @@ func _process(delta):
 
 func _on_area_body_entered(body):
 	body.State.coin += 1;
-	#Makes the player play the powerup sound.
-	body.Sounds.coin = true;
+	#Makes the player play the coin sound.
+	body.Sounds.Coin = true;
 	queue_free();
 	pass # Replace with function body.

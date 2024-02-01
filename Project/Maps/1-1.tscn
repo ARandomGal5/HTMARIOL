@@ -1,5 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://ptljpxwvr7xx"]
+[gd_scene load_steps=9 format=3 uid="uid://ptljpxwvr7xx"]
 
+[ext_resource type="Script" path="res://Actors/Meta/world.gd" id="1_221wv"]
 [ext_resource type="Texture2D" uid="uid://beegdgnv2nyec" path="res://Sprites/ref.png" id="2_gkxt4"]
 [ext_resource type="TileSet" uid="uid://b5fq7vmex1l7i" path="res://Sprites/World/scenery.tres" id="3_dvycj"]
 [ext_resource type="TileSet" uid="uid://dcg6wfvfa1op6" path="res://Sprites/World/blocks_coins.tres" id="4_nqnsl"]
@@ -11,6 +12,7 @@
 [node name="Level" type="Node2D"]
 
 [node name="World" type="Node2D" parent="."]
+script = ExtResource("1_221wv")
 
 [node name="Reference" type="Sprite2D" parent="World"]
 visible = false
@@ -40,11 +42,11 @@ layer_0/tile_data = PackedInt32Array(917505, 1, 0, 851968, 1, 0, 917504, 1, 0, 8
 scale = Vector2(9, 9)
 tile_set = ExtResource("6_3efwf")
 format = 2
-layer_0/tile_data = PackedInt32Array(589845, 0, 0, 524352, 262144, 0, 589902, 0, 0, 327789, 0, 0)
+layer_0/tile_data = PackedInt32Array(589845, 0, 0, 524352, 262144, 0, 589902, 0, 0, 327789, 0, 0, 589925, 196608, 0)
 
 [node name="Music" type="AudioStreamPlayer" parent="World"]
-unique_name_in_owner = true
 stream = ExtResource("6_j8qnv")
+volume_db = 1.0
 
 [node name="Actors" type="Node2D" parent="."]
 

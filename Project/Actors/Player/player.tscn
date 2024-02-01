@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://brpnuk26s7usk"]
+[gd_scene load_steps=52 format=3 uid="uid://brpnuk26s7usk"]
 
 [ext_resource type="Script" path="res://Actors/Player/player.gd" id="1_nb1jr"]
 [ext_resource type="Texture2D" uid="uid://bnmjla5xx5o14" path="res://Sprites/Mario/die.png" id="2_2mxyc"]
@@ -27,6 +27,7 @@
 [ext_resource type="AudioStream" uid="uid://b0yebfvb3auvf" path="res://Sounds/sfx/1up.wav" id="19_wdwca"]
 [ext_resource type="AudioStream" uid="uid://kw6dgw2sccoj" path="res://Sounds/sfx/Bump.wav" id="20_r3y5j"]
 [ext_resource type="AudioStream" uid="uid://cn7u4vghy2boo" path="res://Sounds/sfx/Coin.wav" id="21_8n2fa"]
+[ext_resource type="Shape2D" uid="uid://b0cei6tshf144" path="res://Actors/Player/big_hitbox.tres" id="28_yxd6y"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kd14f"]
 size = Vector2(12, 24)
@@ -325,6 +326,18 @@ collision_layer = 64
 position = Vector2(-224, -121)
 shape = SubResource("RectangleShape2D_4j3ku")
 
+[node name="Area2Ds" type="Node2D" parent="."]
+
+[node name="UncrouchHitBox" type="Area2D" parent="Area2Ds"]
+visible = false
+collision_layer = 16
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2Ds/UncrouchHitBox"]
+position = Vector2(0, -4)
+shape = ExtResource("28_yxd6y")
+debug_color = Color(0.960784, 0, 0.509804, 0.419608)
+
 [node name="Sprites" type="Node2D" parent="."]
 
 [node name="SpriteSmall" type="AnimatedSprite2D" parent="Sprites"]
@@ -375,3 +388,6 @@ stream = ExtResource("18_3jn03")
 [node name="OneupSound" type="AudioStreamPlayer" parent="Sounds"]
 unique_name_in_owner = true
 stream = ExtResource("19_wdwca")
+
+[connection signal="body_entered" from="Area2Ds/UncrouchHitBox" to="." method="_on_uncrouch_hit_box_body_entered"]
+[connection signal="body_exited" from="Area2Ds/UncrouchHitBox" to="." method="_on_uncrouch_hit_box_body_exited"]

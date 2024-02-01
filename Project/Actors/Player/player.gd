@@ -56,6 +56,7 @@ var State = {
 	IsSkidding = false,
 	IsRunning = false,
 	IsCrouching = false,
+	CanUncrouch = true,
 	JumpLetGo = false,
 	power = 0,
 	block = self,
@@ -85,10 +86,12 @@ var Counters = {
 
 #Used so that powerups can play a sound even though they get deleted on the same frame they're picked up. The powerup sets one of these to true which will play a sound, then set itself to false.
 var Sounds = {
-	powerup = false,
-	oneup = false,
-	coin = false,
-	item = false,
+	PowerUp = false,
+	OneUp = false,
+	Coin = false,
+	Item = false,
+	BlockBreak = false,
+	Bump = false,
 }
 
 #Sets the gravity to it's default value on play initilize.
@@ -119,7 +122,7 @@ func _physics_process(delta):
 					gravity = LET_FALL_FAST;
 		velocity.y += gravity
 		Counters.floor_time = 0;
-		State.IsCrouching = false;
+		if State.CanUncrouch == true: State.IsCrouching = false;
 	else:
 		State.IsJumping = false;
 		State.JumpLetGo = false;
@@ -215,7 +218,7 @@ func _physics_process(delta):
 	#If you press down while not pressing anything crouch.
 	if Input.is_action_pressed('down'):
 		State.IsCrouching = true;
-	else: State.IsCrouching = false;
+	elif State.CanUncrouch == true: State.IsCrouching = false;
 		
 	#if you press left or were holding left and just land, while on the floor, flip the direction of the player so they turn around.
 	if ((xinput == -1 || xinput == -1 && Counters.floor_time == 1) && State.direction == 1 || (xinput == 1 || xinput == 1 && Counters.floor_time == 1) && State.direction == -1) && is_on_floor() && State.IsCrouching == false:
@@ -262,7 +265,7 @@ func _physics_process(delta):
 		if Sprite.anim != "crouch": 
 			%BigHitbox.disabled = false;
 			%CrouchHitBox.disabled = true;
-		else: 
+		elif State.CanUncrouch == true: 
 			%BigHitbox.disabled = true;
 			%CrouchHitBox.disabled = false;
 
@@ -272,33 +275,46 @@ func _physics_process(delta):
 			Sprite.anim = "run";
 		elif State.IsSkidding == true:
 			Sprite.anim = "turn";
-		else:
+		elif State.CanUncrouch == true || State.power == 0:
 			Sprite.anim = "idle";
 			
 		if !xinput && State.IsCrouching == true && State.power > 0:
 			Sprite.anim = "crouch";
 		Sprite.anim_speed = 1;
 	else:
-		if State.IsJumping == true:
+		if State.IsJumping == true && (State.CanUncrouch == true || State.power == 0):
 			Sprite.anim = "jump";
 			Sprite.anim_speed = 1;
-		else:
+		elif (State.CanUncrouch == true || State.power == 0):
 			Sprite.anim = "run";
 			Sprite.anim_speed = 0;
 			Sprite.sprite.set_frame_and_progress(2, 0);
 	
 	Sprite.sprite.play(Sprite.anim, Sprite.anim_speed);
 	
-	if Sounds.powerup == true:
+	if Sounds.PowerUp == true:
 		%PowerSound.play();
-		Sounds.powerup = false;
-	if Sounds.oneup == true:
+		Sounds.PowerUp = false;
+	if Sounds.OneUp == true:
 		%OneupSound.play();
-		Sounds.oneup = false;
-	if Sounds.coin == true:
+		Sounds.OneUp = false;
+	if Sounds.Coin == true:
 		%CoinSound.play();
-		Sounds.coin = false;
-	if Sounds.item == true:
+		Sounds.Coin = false;
+	if Sounds.Item == true:
 		%ItemSound.play();
-		Sounds.item = false;
+		Sounds.Item = false;
+	if Sounds.BlockBreak == true:
+		%BreakSound.play();
+		Sounds.BlockBreak = false;
+	if Sounds.Bump == true:
+		%BumpSound.play();
+		Sounds.Bump = false;
 	move_and_slide()
+
+
+func _on_uncrouch_hit_box_body_entered(body):
+	State.CanUncrouch = false;
+
+func _on_uncrouch_hit_box_body_exited(body):
+	State.CanUncrouch = true;
