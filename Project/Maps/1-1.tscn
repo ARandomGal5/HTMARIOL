@@ -1,6 +1,5 @@
-[gd_scene load_steps=9 format=3 uid="uid://ptljpxwvr7xx"]
+[gd_scene load_steps=8 format=3 uid="uid://ptljpxwvr7xx"]
 
-[ext_resource type="Script" path="res://Actors/Meta/level.gd" id="1_if0kr"]
 [ext_resource type="Texture2D" uid="uid://beegdgnv2nyec" path="res://Sprites/ref.png" id="2_gkxt4"]
 [ext_resource type="TileSet" uid="uid://b5fq7vmex1l7i" path="res://Sprites/World/scenery.tres" id="3_dvycj"]
 [ext_resource type="TileSet" uid="uid://dcg6wfvfa1op6" path="res://Sprites/World/blocks_coins.tres" id="4_nqnsl"]
@@ -10,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://brpnuk26s7usk" path="res://Actors/Player/player.tscn" id="7_i0s34"]
 
 [node name="Level" type="Node2D"]
-script = ExtResource("1_if0kr")
 
 [node name="World" type="Node2D" parent="."]
 

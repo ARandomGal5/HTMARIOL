@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://brpnuk26s7usk"]
+[gd_scene load_steps=51 format=3 uid="uid://brpnuk26s7usk"]
 
 [ext_resource type="Script" path="res://Actors/Player/player.gd" id="1_nb1jr"]
 [ext_resource type="Texture2D" uid="uid://bnmjla5xx5o14" path="res://Sprites/Mario/die.png" id="2_2mxyc"]
@@ -27,8 +27,6 @@
 [ext_resource type="AudioStream" uid="uid://b0yebfvb3auvf" path="res://Sounds/sfx/1up.wav" id="19_wdwca"]
 [ext_resource type="AudioStream" uid="uid://kw6dgw2sccoj" path="res://Sounds/sfx/Bump.wav" id="20_r3y5j"]
 [ext_resource type="AudioStream" uid="uid://cn7u4vghy2boo" path="res://Sounds/sfx/Coin.wav" id="21_8n2fa"]
-[ext_resource type="Shape2D" uid="uid://b0cei6tshf144" path="res://Actors/Player/big_hitbox.tres" id="28_yxd6y"]
-[ext_resource type="Shape2D" uid="uid://cpeaeintrk81c" path="res://Actors/Player/crouch_hitbox.tres" id="29_h400n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kd14f"]
 size = Vector2(12, 24)
@@ -377,36 +375,3 @@ stream = ExtResource("18_3jn03")
 [node name="OneupSound" type="AudioStreamPlayer" parent="Sounds"]
 unique_name_in_owner = true
 stream = ExtResource("19_wdwca")
-
-[node name="Area2Ds" type="Node2D" parent="."]
-
-[node name="SmallItemHitbox" type="Area2D" parent="Area2Ds"]
-collision_layer = 16
-collision_mask = 32
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2Ds/SmallItemHitbox"]
-position = Vector2(0, 1.5)
-shape = ExtResource("19_2ixeq")
-
-[node name="BigItemHitbox" type="Area2D" parent="Area2Ds"]
-collision_layer = 16
-collision_mask = 32
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2Ds/BigItemHitbox"]
-position = Vector2(0, -4.5)
-shape = ExtResource("28_yxd6y")
-
-[node name="CrouchItemHitbox" type="Area2D" parent="Area2Ds"]
-collision_layer = 16
-collision_mask = 32
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2Ds/CrouchItemHitbox"]
-position = Vector2(0, 1.55556)
-shape = ExtResource("29_h400n")
-
-[connection signal="body_entered" from="Area2Ds/SmallItemHitbox" to="." method="_on_small_item_hitbox_body_entered"]
-[connection signal="body_exited" from="Area2Ds/SmallItemHitbox" to="." method="_on_small_item_hitbox_body_exited"]
-[connection signal="body_entered" from="Area2Ds/BigItemHitbox" to="." method="_on_big_item_hitbox_body_entered"]
-[connection signal="body_exited" from="Area2Ds/BigItemHitbox" to="." method="_on_big_item_hitbox_body_exited"]
-[connection signal="body_entered" from="Area2Ds/CrouchItemHitbox" to="." method="_on_crouch_item_hitbox_body_entered"]
-[connection signal="body_exited" from="Area2Ds/CrouchItemHitbox" to="." method="_on_crouch_item_hitbox_body_exited"]
