@@ -186,7 +186,7 @@ func spawn_item(player, cell, block_item) -> void:
 		else: path = preload('res://Actors/Level Objects/fire_flower.tscn').instantiate();
 	#2 for mushroom.
 	elif block_item == 2: path = preload('res://Actors/Level Objects/mushroom.tscn').instantiate();
-#3 for fire flower.
+	#3 for fire flower.
 	elif block_item == 3: path = preload('res://Actors/Level Objects/fire_flower.tscn').instantiate();
 	#4 for star.
 	elif block_item == 4: path = preload('res://Actors/Level Objects/fire_flower.tscn').instantiate();

@@ -11,18 +11,18 @@ collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_eexur")
 
-[node name="Sprite" type="Sprite2D" parent="."]
-scale = Vector2(9, 9)
-texture = ExtResource("2_dvl2a")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_el85b")
-
 [node name="Area" type="Area2D" parent="."]
 collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area"]
 shape = SubResource("RectangleShape2D_el85b")
 debug_color = Color(0.988235, 0, 0.305882, 0.419608)
+
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(9, 9)
+texture = ExtResource("2_dvl2a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_el85b")
 
 [connection signal="body_entered" from="Area" to="." method="_on_area_body_entered"]

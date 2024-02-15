@@ -92,6 +92,8 @@ var Sounds = {
 	Item = false,
 	BlockBreak = false,
 	Bump = false,
+	Warp = false,
+	Squish = false,
 }
 
 #Sets the gravity to it's default value on play initilize.
@@ -310,6 +312,12 @@ func _physics_process(delta):
 	if Sounds.Bump == true:
 		%BumpSound.play();
 		Sounds.Bump = false;
+	if Sounds.Warp == true:
+		%WarpSound.play();
+		Sounds.Warp = false;
+	if Sounds.Squish == true:
+		%SquishSound.play();
+		Sounds.Squish = false
 	move_and_slide()
 
 

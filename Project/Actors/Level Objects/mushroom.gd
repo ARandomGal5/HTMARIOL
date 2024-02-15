@@ -39,7 +39,8 @@ func _process(delta):
 		#Make the item go up every frame.
 		position.y -= 0.25*9;
 		#Once the item reaches the top stop going up.
-		if Counters.deploy_time == 64:
+		if Counters.deploy_time >= 64:
+			reparent($'Actors')
 			State.deploying = false;
 		Counters.deploy_time += 1;
 

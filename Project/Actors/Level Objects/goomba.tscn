@@ -1,7 +1,22 @@
-[gd_scene load_steps=8 format=3 uid="uid://d2j4fweqhqvsg"]
+[gd_scene load_steps=23 format=3 uid="uid://d2j4fweqhqvsg"]
 
 [ext_resource type="Script" path="res://Actors/Level Objects/goomba.gd" id="1_btbrw"]
-[ext_resource type="Texture2D" uid="uid://dnvvqg20i24kh" path="res://Sprites/Level Objects/Enemies/goomba.png" id="2_euthm"]
+[ext_resource type="Texture2D" uid="uid://bu8vi1pv5pyck" path="res://Sprites/Level Objects/Enemies/Goomba/die_castle.png" id="2_67ehm"]
+[ext_resource type="Texture2D" uid="uid://dnvvqg20i24kh" path="res://Sprites/Level Objects/Enemies/Goomba/goomba_overworld.png" id="2_euthm"]
+[ext_resource type="Texture2D" uid="uid://d0vg2q22fhnpb" path="res://Sprites/Level Objects/Enemies/Goomba/die_overworld.png" id="3_na5rf"]
+[ext_resource type="Texture2D" uid="uid://bolgwwag8sb35" path="res://Sprites/Level Objects/Enemies/Goomba/die_underground.png" id="4_02pvy"]
+[ext_resource type="Texture2D" uid="uid://cleyswgv6ay46" path="res://Sprites/Level Objects/Enemies/Goomba/die_underwater.png" id="5_n7365"]
+[ext_resource type="Texture2D" uid="uid://wy6fosqvjgch" path="res://Sprites/Level Objects/Enemies/Goomba/goomba_castle.png" id="6_jfhcc"]
+[ext_resource type="Texture2D" uid="uid://drote786bac3d" path="res://Sprites/Level Objects/Enemies/Goomba/goomba_underground.png" id="8_726wo"]
+[ext_resource type="Texture2D" uid="uid://tjjdymv43225" path="res://Sprites/Level Objects/Enemies/Goomba/goomba_underwater.png" id="9_q5r4e"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_npdyl"]
+atlas = ExtResource("6_jfhcc")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_am071"]
+atlas = ExtResource("6_jfhcc")
+region = Rect2(18, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g7460"]
 atlas = ExtResource("2_euthm")
@@ -11,8 +26,35 @@ region = Rect2(0, 0, 16, 16)
 atlas = ExtResource("2_euthm")
 region = Rect2(18, 0, 16, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_63067"]
+atlas = ExtResource("8_726wo")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hvvto"]
+atlas = ExtResource("8_726wo")
+region = Rect2(18, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cclum"]
+atlas = ExtResource("9_q5r4e")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vgnsf"]
+atlas = ExtResource("9_q5r4e")
+region = Rect2(18, 0, 16, 16)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_is02j"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_npdyl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_am071")
+}],
+"loop": true,
+"name": &"castle",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_g7460")
@@ -21,34 +63,115 @@ animations = [{
 "texture": SubResource("AtlasTexture_3ndfb")
 }],
 "loop": true,
-"name": &"walk",
+"name": &"overworld",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_63067")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hvvto")
+}],
+"loop": true,
+"name": &"underground",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cclum")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vgnsf")
+}],
+"loop": true,
+"name": &"underwater",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1k17s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_67ehm")
+}],
+"loop": true,
+"name": &"castle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_na5rf")
+}],
+"loop": true,
+"name": &"overworld",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_02pvy")
+}],
+"loop": true,
+"name": &"underground",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_n7365")
+}],
+"loop": true,
+"name": &"underwater",
 "speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4ok12"]
 size = Vector2(99, 54)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cmp48"]
+size = Vector2(99, 63)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s3w13"]
-size = Vector2(99, 144)
+size = Vector2(99, 72)
 
 [node name="Goomba1" type="CharacterBody2D"]
 collision_layer = 8
 collision_mask = 2
 script = ExtResource("1_btbrw")
 
-[node name="Sprite" type="AnimatedSprite2D" parent="."]
+[node name="Sprite_Walk" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
 scale = Vector2(9, 9)
 sprite_frames = SubResource("SpriteFrames_is02j")
-animation = &"walk"
+animation = &"overworld"
 
-[node name="Hurtbox" type="Area2D" parent="."]
+[node name="Sprite_Die" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+visible = false
+position = Vector2(0, 36)
+scale = Vector2(9, 9)
+sprite_frames = SubResource("SpriteFrames_1k17s")
+animation = &"castle"
+
+[node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(4.5, 9)
 shape = SubResource("RectangleShape2D_4ok12")
+debug_color = Color(0.941176, 0.215686, 0.301961, 0.419608)
 
-[node name="Hitbox" type="CollisionShape2D" parent="."]
-position = Vector2(4.5, 0)
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(4.5, 4.5)
+shape = SubResource("RectangleShape2D_cmp48")
+one_way_collision = true
+debug_color = Color(0, 0.635294, 0.396078, 0.419608)
+
+[node name="PhysicsCollision" type="CollisionShape2D" parent="."]
+position = Vector2(4.5, 36)
 shape = SubResource("RectangleShape2D_s3w13")
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
